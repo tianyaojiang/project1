@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.langlang.health.account.mapper.EquipmentMapper">
+   
+    <resultMap id="ResultMap" type="com.langlang.health.account.entity.Equipment">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="mac" jdbcType="VARCHAR" property="mac"/>
+        <result column="uuid" jdbcType="VARCHAR" property="uuid"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    
+    <sql id="BASE_TABLE">acc_equipment</sql>
+    
+    <select id="getEquipment" parameterType="com.langlang.health.account.entity.Equipment" resultMap="ResultMap">
+        SELECT id, user_id, type, name, mac, uuid, remark, create_time, update_time
+        FROM
+        <include refid="BASE_TABLE"/>
+        <where>
+        	<if test="userId != null" >
+        		AND user_id=#{userId}
+        	</if>
+        	<if test="type != null" >
+        		AND type=#{type}
+        	</if>
+        	<if test="name != null" >
+        		AND name=#{name}
+        	</if>
+        </where>
+    </select>
+    
+    <delete id="deleteEquipment" parameterType="int">
+    	DELETE FROM 
+    	<include refid="BASE_TABLE"/>
+    	WHERE id = #{id}
+    </delete>
+    
+    <insert id="saveEquipment" parameterType="com.langlang.health.account.entity.Equipment">
+    	INSERT INTO 
+    	<include refid="BASE_TABLE"/> 
+    	(user_id, type, name, mac, uuid, remark, create_time, update_time) 
+    	VALUES 
+    	(#{userId}, #{type}, #{name}, #{mac}, #{uuid}, #{remark}, #{createTime}, #{updateTime});
+    </insert>
+
+</mapper>

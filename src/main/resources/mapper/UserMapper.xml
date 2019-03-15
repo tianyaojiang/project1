@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.langlang.health.system.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.langlang.health.system.entity.User" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="realname" property="realname" jdbcType="VARCHAR" />
+        <result column="gender" property="gender" jdbcType="INTEGER" />
+        <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="department" property="department" jdbcType="VARCHAR" />
+        <result column="rolename" property="rolename" jdbcType="VARCHAR" />
+        <result column="icon" property="icon" jdbcType="VARCHAR" />
+        <result column="mcode" property="mcode" jdbcType="VARCHAR" />
+        <result column="is_del" property="isDel" jdbcType="INTEGER" />
+        <result column="is_lock" property="isLock" jdbcType="INTEGER" />
+        <result column="version" property="version" jdbcType="INTEGER" />
+        <result column="create_id" property="createId" jdbcType="INTEGER" />
+        <result column="create_name" property="createName" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime"  jdbcType="TIMESTAMP"/>
+        <result column="update_id" property="updateId" jdbcType="INTEGER" />
+        <result column="update_name" property="updateName" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
+        <result column="weight" property="weight" jdbcType="DECIMAL"/>
+    </resultMap>
+    <sql id="Base_Column_List" >
+    id, username, realname, gender, mobile, email, password, department, rolename, icon,
+    mcode, is_del, is_lock, version, create_id, create_name, create_time, update_id,
+    update_name, update_time, send_time, weight
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from sys_user
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+    <insert id="insertSelective" parameterType="com.langlang.health.system.entity.User">
+        insert into sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="createId != null">
+                create_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="isDel != null">
+                is_del,
+            </if>
+            <if test="isLock != null">
+                is_lock,
+            </if>
+            <if test="mcode != null">
+                mcode,
+            </if>
+            <if test="sendTime != null">
+                send_time,
+            </if>
+            <if test="version != null">
+                version,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="createId != null">
+                #{createId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDel != null">
+                #{isDel,jdbcType=BIT},
+            </if>
+            <if test="isLock != null">
+                #{isLock,jdbcType=BIT},
+            </if>
+            <if test="mcode != null">
+                #{mcode,jdbcType=VARCHAR},
+            </if>
+            <if test="sendTime != null">
+                #{sendTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <!--<update id="updateByPrimaryKey" parameterType="com.langlang.health.system.entity.User">-->
+		<!--update sys_user-->
+		<!--set-->
+		<!--username = #{username,jdbcType=VARCHAR},-->
+		<!--mobile =-->
+		<!--#{mobile,jdbcType=VARCHAR},-->
+		<!--email = #{email,jdbcType=VARCHAR},-->
+		<!--password-->
+		<!--= #{password,jdbcType=VARCHAR},-->
+		<!--create_id =-->
+		<!--#{createId,jdbcType=INTEGER},-->
+		<!--create_time =-->
+		<!--#{createTime,jdbcType=TIMESTAMP},-->
+		<!--update_time =-->
+		<!--#{updateTime,jdbcType=TIMESTAMP},-->
+		<!--is_del = #{isDel,jdbcType=BIT},-->
+		<!--is_lock = #{isLock,jdbcType=BIT},-->
+		<!--mcode = #{mcode,jdbcType=VARCHAR},-->
+		<!--send_time = #{sendTime,jdbcType=TIMESTAMP},-->
+		<!--version =-->
+		<!--#{version,jdbcType=INTEGER}-->
+		<!--where id = #{id,jdbcType=INTEGER}-->
+	<!--</update>-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.langlang.health.system.entity.User">
+		insert into sys_user (id, username, mobile,
+		email, password,
+		create_id,
+		create_time, update_time, is_del,
+		is_lock, mcode, send_time,
+		version
+		)
+		values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR},
+		#{mobile,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR}, #{createId,jdbcType=INTEGER},
+		#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+		#{isDel,jdbcType=BIT},
+		#{isLock,jdbcType=BIT},
+		#{mcode,jdbcType=VARCHAR}, #{sendTime,jdbcType=TIMESTAMP},
+		0
+		)
+	</insert>
+    <!--<update id="updateByPrimaryKeySelective" parameterType="com.langlang.health.system.entity.User">-->
+        <!--update sys_user-->
+        <!--<set>-->
+            <!--<if test="username != null">-->
+                <!--username = #{username,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="mobile != null">-->
+                <!--mobile = #{mobile,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="email != null">-->
+                <!--email = #{email,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="password != null and password !=''">-->
+                <!--password = #{password,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="createId != null">-->
+                <!--create_id = #{createId,jdbcType=INTEGER},-->
+            <!--</if>-->
+            <!--<if test="createTime != null">-->
+                <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+            <!--</if>-->
+            <!--<if test="updateTime != null">-->
+                <!--update_time = #{updateTime,jdbcType=TIMESTAMP},-->
+            <!--</if>-->
+            <!--<if test="isDel != null">-->
+                <!--is_del = #{isDel,jdbcType=BIT},-->
+            <!--</if>-->
+            <!--<if test="isLock != null">-->
+                <!--is_lock = #{isLock,jdbcType=BIT},-->
+            <!--</if>-->
+            <!--<if test="mcode != null">-->
+                <!--mcode = #{mcode,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="sendTime != null">-->
+                <!--send_time = #{sendTime,jdbcType=TIMESTAMP},-->
+            <!--</if>-->
+            <!--version = version+1-->
+        <!--</set>-->
+        <!--where id = #{id,jdbcType=INTEGER}-->
+    <!--</update>-->
+
+
+    <!--=Start getUsers 分页查询用户列表userSearch -->
+    <select id="getUsers" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        <where>
+            <if test="userSearch.mobile!=null and userSearch.mobile!=''">
+                AND mobile =#{userSearch.mobile}
+            </if>
+            <if test="userSearch.username!=null and userSearch.username!=''">
+                AND username like CONCAT(CONCAT('%',#{userSearch.username}),
+                '%')
+            </if>
+            <if
+                    test="userSearch.insertTimeStart!=null and userSearch.insertTimeStart!=''">
+                AND create_time &gt;= #{userSearch.insertTimeStart}
+            </if>
+            <if test="userSearch.insertTimeEnd!=null and userSearch.insertTimeEnd!=''">
+                AND create_time &lt;= #{userSearch.insertTimeEnd}
+            </if>
+        </where>
+        ORDER BY id ASC
+    </select>
+    <!--&lt;!&ndash;=End getUsers 分页查询用户列表 &ndash;&gt;-->
+     <!---->
+    <!--&lt;!&ndash; 设置用户是否禁用 &ndash;&gt;-->
+    <!--<update id="setLockUser" parameterType="com.langlang.health.system.entity.User" >-->
+		<!--update sys_user-->
+		<!--set-->
+		<!--is_lock = #{isLock,jdbcType=INTEGER},-->
+		<!--create_id = #{createId,jdbcType=INTEGER},-->
+		<!--update_time=NOW(),-->
+		<!--version=version+1-->
+		<!--where id =-->
+		<!--#{id,jdbcType=INTEGER}-->
+	<!--</update>-->
+    <!--&lt;!&ndash;=Start setJobUser 设置用户 &ndash;&gt;-->
+
+    <!--&lt;!&ndash; 删除用户 &ndash;&gt;-->
+    <!--<delete id="deleteUser" >-->
+    <!--delete from sys_user-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+    <!--</delete>-->
+
+    <!--&lt;!&ndash;=Start getUserAndRoles 查询用户及他对应的角色ids &ndash;&gt;-->
+    <!--<resultMap id="getUserRoles" type="com.langlang.llx.upms.entity.UserRolesVO">-->
+        <!--<id column="id" jdbcType="INTEGER" property="id" />-->
+        <!--<result column="username" jdbcType="VARCHAR" property="username" />-->
+        <!--<result column="mobile" jdbcType="VARCHAR" property="mobile" />-->
+        <!--<result column="email" jdbcType="VARCHAR" property="email" />-->
+        <!--<result column="create_id" jdbcType="INTEGER" property="createId" />-->
+        <!--<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />-->
+        <!--<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />-->
+        <!--<result column="is_del" jdbcType="BIT" property="isDel" />-->
+        <!--<result column="is_lock" jdbcType="BIT" property="isLock" />-->
+        <!--<result column="version" jdbcType="INTEGER" property="version" />-->
+
+        <!--<collection property="userRoles" ofType="com.langlang.health.system.entity.UserRoleKey">-->
+            <!--<result column="user_id" property="userId" />-->
+            <!--<result column="role_id" property="roleId" />-->
+        <!--</collection>-->
+
+    <!--</resultMap>-->
+    <!--<select id="getUserAndRoles" resultMap="getUserRoles">-->
+		<!--select-->
+		<!--u.id, u.username,-->
+		<!--u.mobile, u.email, u.create_id createId,u.create_time-->
+		<!--createTime,-->
+		<!--u.update_time updateTime, u.is_del isDel,u.is_lock isLock,u.version,-->
+		<!--ur.user_id,ur.role_id-->
+		<!--from sys_user u-->
+		<!--LEFT JOIN sys_user_role ur ON-->
+		<!--u.id=ur.user_id-->
+		<!--WHERE u.id=#{id} AND u.is_del=0 and u.is_lock=0-->
+	<!--</select>-->
+    <!--&lt;!&ndash;=End getUserAndRoles 查询用户及他对应的角色ids &ndash;&gt;-->
+
+    <!--=Start findUser 根据用户名和密码查找用户 -->
+    <select id="findUser" resultType="com.langlang.health.system.entity.User">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        WHERE username=#{username} AND password =#{password} and
+        is_del=0 and
+        is_lock=0
+    </select>
+    <!--=End findUser 根据用户名和密码查找用户 -->
+    <!--=Start findUserByMobile 根据手机号获取用户数据 -->
+    <select id="findUserByMobile" resultType="com.langlang.health.system.entity.User">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        WHERE
+        mobile=#{mobile} and is_del=0
+    </select>
+    <!--=End findUserByMobile 根据手机号查找用户 -->
+    <!--=Start findUserByName 根据用户名获取用户数据 -->
+    <select id="findUserByName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        WHERE username=#{username} and is_del=0
+    </select>
+    <!--=End findUserByName 根据用户名查找用户 -->
+    <!--=Start updatePwd 修改用户密码 -->
+    <update id="updatePwd">
+		update sys_user
+		set
+		password = #{password},
+		update_time=NOW()
+		where id = #{id,jdbcType=INTEGER} and is_del=0 AND
+		is_lock=0
+	</update>
+    <!--=Start updatePwd 修改用户密码 -->
+    <!--=Start setUserLockNum 锁定用户 -->
+    <!-- <update id="setUserLockNum"> update user set is_lock = #{isLock}, lock_time=NOW()
+        where id = #{id,jdbcType=INTEGER} and is_del=0 AND is_lock=0 </update> -->
+    <!--=Start setUserLockNum 锁定用户 -->
+    <select id="searchRelations" resultType="com.langlang.health.system.entity.User">
+      select id, username, realname, gender, mobile, email, password, department, rolename,
+            icon, mcode, is_del isDel, is_lock isLock, version, create_id createId, create_name createName,
+            create_time createTime, update_id updateId,update_name updateName,update_time updateTime,send_time sendTime 
+        from sys_user u, acc_relation r 
+        where u.id = r.relation_id
+        and r.user_id = #{userId}
+        and r.relation_type = #{relationType}
+    </select>
+    <update id="updateWeight">
+      update sys_user
+      set weight = #{weight, jdbcType=INTEGER}
+      where id = #{id, jdbcType=INTEGER} AND is_del=0 AND
+       is_lock=0
+    </update>
+</mapper>

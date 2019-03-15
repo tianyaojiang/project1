@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.langlang.health.mine.mapper.MessageMapper">
+   <resultMap type="com.langlang.health.mine.entity.Message" id="messageMap">
+       <id property="id" column="id"/>
+       <result property="message" column="message"/>
+       <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+       <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+       <result property="createId" column="create_id"/>
+       <result property="updateId" column="update_id"/>
+   </resultMap> 
+   
+   <select id="searchMessages" resultType="com.langlang.health.mine.entity.Message">
+       select m.id, 
+         m.message, 
+         m.create_time createTime,
+         m.update_time updateTime,
+         m.create_id createId,
+         m.update_id updateId,
+         u.realname userName,
+         u.mobile mobile
+       from sys_message m, sys_user u
+       where m.create_id = u.id
+   </select>
+   
+   <insert id="addMessage" useGeneratedKeys="true" keyProperty="id" parameterType="com.langlang.health.mine.entity.Message">
+       insert into sys_message(message, create_id, update_id, create_time, update_time)
+       values(#{message}, #{createId}, #{updateId}, #{createTime}, #{updateTime})
+   </insert>
+   
+   <update id="updateMessage" parameterType="map">
+       update sys_message 
+       <set>
+         <if test="message.message != null">
+             message = #{message.message},
+         </if>
+         <if test="message.updateId != null"></if>
+         update_time = #{message.updateTime}
+       </set>
+       where id = #{message.updateId}
+   </update>
+   
+   <delete id="deleteMessage" parameterType="java.lang.Integer">
+       delete from sys_message where id = #{id, jdbcType=INTEGER}
+   </delete>
+</mapper>

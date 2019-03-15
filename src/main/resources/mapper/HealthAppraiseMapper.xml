@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.langlang.health.mobile.mapper.HealthAppraiseMapper">
+    <select id="getAppraise" parameterType="com.langlang.health.mobile.entity.HealthAppraiseData" resultType="com.langlang.health.mobile.entity.HealthAppraiseData">
+        SELECT * FROM health_appraise
+        <where>
+        	<if test="uid != null" >
+        		and uid=#{uid}
+        	</if>
+        	 <if test="time != null" >
+        		and time=#{time}
+        	</if> 
+        </where>
+    </select>
+    <insert id="addAppraise" parameterType="com.langlang.health.mobile.entity.HealthAppraiseData">
+    	insert into health_appraise (
+		uid,height,weight,questionstr,kb,sbp,dbp,glu,glu2h,tc,tg,hdlc,ldlc,hbalc,hcy,hgb,alt,ast,ua,bun,scr,ccr,gfr,malb,pro,cardiograph,bultrasound,xRay,time,appraiseid) values (
+		#{uid},#{height},#{weight},#{questionstr},#{kb},#{sbp},#{dbp},#{glu},#{glu2h},#{tc},#{tg},#{hdlc},#{ldlc},#{hbalc},#{hcy},#{hgb},#{alt},#{ast},#{ua},#{bun},#{scr},#{ccr},#{gfr},#{malb},#{pro},#{cardiograph},#{bultrasound},#{xRay},#{time},#{appraiseid});
+    </insert>
+    <update id="updateAppraise" parameterType="com.langlang.health.mobile.entity.HealthAppraiseData">
+		update health_appraise set 
+		height=#{height},weight=#{weight},questionstr=#{questionstr},kb=#{kb},sbp=#{sbp},dbp=#{dbp},glu=#{glu},glu2h=#{glu2h},tc=#{tc},tg=#{tg},hdlc=#{hdlc},
+		ldlc=#{ldlc},hbalc=#{hbalc},hcy=#{hcy},hgb=#{hgb},alt=#{alt},ast=#{ast},ua=#{ua},bun=#{bun},scr=#{scr},ccr=#{ccr},gfr=#{gfr},malb=#{malb},pro=#{pro},
+		cardiograph=#{cardiograph},bultrasound=#{bultrasound},xRay=#{xRay},appraiseid=#{appraiseid}
+		 <where>
+        	<if test="uid != null" >
+        		and uid=#{uid}
+        	</if>
+        	 <if test="time != null" >
+        		and time=#{time}
+        	</if> 
+        </where>
+	</update>
+    
+
+</mapper>

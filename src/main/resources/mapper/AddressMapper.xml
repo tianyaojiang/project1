@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.langlang.health.mine.mapper.AddressMapper">
+   
+   <select id="getAddressByUserId" resultType="com.langlang.health.pay.entity.Address">
+      select add.id id, user.username userName, user.realname nickName, add.gender, add.mobile, add.area, add.address,add.is_default isDefault, add.is_select isSelect    
+      from acc_address add, sys_user user 
+      where add.user_id = user.id 
+      and user.id = #{userId}
+   </select>
+   
+   <sql id="base_column_list">
+     id, user_id, recipient_name, gender, mobile, area, address, is_default, is_select, create_time, update_time
+   </sql>
+   
+   <insert id="addAddress" useGeneratedKeys="true" keyProperty="id">
+     insert into acc_address(
+       user_id, recipient_name, gender, mobile, area, address, is_default, is_select, create_time, update_time
+     ) values(
+       #{userId}, #{recipientName}, #{gender}, #{mobile}, #{area}, #{address}, #{isDefault}, #{isSelect}, #{createTime}, #{updateTime}
+     )
+   </insert>
+   
+   <delete id="deleteAddress" parameterType="java.lang.Integer">
+     delete from acc_address where id = #{addressId,jdbcType=INTEGER} 
+   </delete>
+   
+   <update id="updateAddress">
+     update acc_address
+     <set>
+       <if test="address.mobile != null">
+         mobile = #{address.mobile},
+       </if>
+       <if test="address.area != null">
+         area = #{address.area},     
+       </if>
+       <if test="address.address != null">
+         address = #{address.address},
+       </if>
+       update_time = #{updateTime}
+     </set>
+     where id = #{address.id}
+   </update>
+</mapper>

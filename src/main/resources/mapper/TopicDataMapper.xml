@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.langlang.health.mobile.mapper.TopicDataMapper">
+   <resultMap id="ResultMap" type="com.langlang.health.mobile.entity.TopicData">
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="mess_type" jdbcType="VARCHAR" property="messType"/>
+        <result column="mess_name" jdbcType="VARCHAR" property="messName"/>
+        <result column="mess_value" jdbcType="INTEGER" property="messValue"/>
+       <!--  <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/> -->
+    </resultMap>
+   
+    <select id="getMessData" parameterType="com.langlang.health.mobile.entity.TopicData" resultMap="ResultMap">
+        SELECT * FROM acc_topic_data 
+        <where>
+        	<if test="userId != null" >
+        		and user_id=#{userId}
+        	</if>
+        	<if test="messName != null" >
+        		and mess_Name=#{messName}
+        	</if>
+        	<if test="messType != null" >
+        		and mess_type=#{messType}
+        	</if>
+        </where>
+		
+    </select>
+    
+    <insert id="addMessData" parameterType="com.langlang.health.mobile.entity.TopicData">
+        insert into acc_topic_data (user_id, mess_name,mess_value,mess_type,create_time) VALUES
+            (#{userId},#{messName},#{messValue},#{messType},#{createTime})
+    </insert>
+
+    <update id="updateMessData" parameterType="com.langlang.health.mobile.entity.TopicData">
+		update acc_topic_data 
+		 <trim prefix="set" suffixOverrides=",">
+		 <if test="messValue != null">mess_value=#{messValue},</if> 
+		</trim>
+		 <where>
+        	<if test="userId != null" >
+        		and user_id=#{userId}
+        	</if>
+        	<if test="messType != null" >
+        		and mess_type=#{messType}
+        	</if>
+        	<if test="messName != null" >
+        		and mess_name=#{messName}
+        	</if>
+        </where>
+	</update>
+    
+</mapper>

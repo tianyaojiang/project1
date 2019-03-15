@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.langlang.health.pay.mapper.ProductMapper">
+
+	<!-- 获取健康链接服务包 -->
+    <select id="getHealthLink" resultType="Map" >
+        
+      SELECT * from sys_service_package where consulting='1'
+      
+    </select>
+<!-- 获取服务包 -->
+	<select id="getBuyCardiacResult" resultType="Map">
+		SELECT
+			*
+		FROM
+			sys_service_package_detail ssd
+		LEFT JOIN sys_item sit ON sit.id = ssd.type
+		LEFT JOIN sys_service_package ssp ON ssd.servId = ssp.servId
+		LEFT JOIN sys_code_item sci ON ssp.type = sci.VALUE
+		WHERE
+			sci. CODE = 'XD01' AND ssp.isDelete='0'
+			<!-- and sit.id = #{arg0}  and 	 sci.VALUE = #{arg1} -->
+		<if test="cateId != null and cateId != 00"><!--  and cateId != '00' -->
+			and sci.VALUE = #{cateId}
+		</if>
+		<if test="itemId != null and itemId != 1"><!-- and itemId != '1' -->
+			and sit.id = #{itemId}
+		</if> 
+		GROUP BY
+			ssd.servId
+		ORDER BY
+			ssp.sort  
+	</select>
+<!-- 获取item -->
+<select id="getItem" resultType="Map">
+		SELECT * from sys_item
+</select>
+<!-- 获取code -->
+<select id="getSysCode" resultType="Map">
+		SELECT * from sys_code_item where code='XD01'
+</select>
+<!-- 获取单个服务包内容 -->
+<select id="getHealthServiceDetails" resultType="Map">
+	select *
+FROM
+	sys_service_package ssp
+LEFT JOIN sys_service_package_detail sspd ON ssp.servId = sspd.servId
+WHERE
+	ssp.servId = #{servId}
+</select>
+</mapper>

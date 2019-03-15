@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.langlang.health.account.mapper.BloodOxygenMapper">
+   
+    <resultMap id="ResultMap" type="com.langlang.health.account.entity.BloodOxygen">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="date" jdbcType="TIMESTAMP" property="date"/>
+        <result column="time" jdbcType="TIMESTAMP" property="time"/>
+        <result column="value" jdbcType="INTEGER" property="min_value"/>
+        <result column="heart" jdbcType="INTEGER" property="heart"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+	
+    <sql id="BASE_TABLE">acc_blood_oxygen</sql>
+    
+    <insert id="saveBloodOxygen" parameterType="com.langlang.health.account.entity.BloodOxygen">
+    	INSERT INTO 
+    	<include refid="BASE_TABLE"/> 
+    	(user_id, date, time, min_value, heart, create_time) 
+    	VALUES 
+    	(#{userId}, #{date}, #{time}, #{value}, #{heart}, #{createTime});
+    </insert>
+    
+    <select id="getBloodOxygenTop1" parameterType="int" resultMap="ResultMap">
+        SELECT id, user_id, date, time, min_value, heart, create_time
+        FROM <include refid="BASE_TABLE"/> 
+        WHERE user_id=#{userId} ORDER BY time DESC limit 1
+    </select>
+    
+    <select id="getBloodOxygens" parameterType="int" resultType="com.langlang.health.account.entity.BloodOxygen">
+        SELECT id, user_id userId, date, time, min_value value, heart, create_time createTime
+        FROM <include refid="BASE_TABLE"/> 
+        WHERE user_id=#{userId} ORDER BY time DESC
+    </select>
+    <select id="getBloodOxygenById" parameterType="int" resultMap="ResultMap">
+        select * 
+        from <include refid="BASE_TABLE"></include>
+        where id=#{oxId}
+    </select>
+</mapper>

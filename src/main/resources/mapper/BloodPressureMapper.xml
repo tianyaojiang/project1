@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.langlang.health.account.mapper.BloodPressureMapper">
+   
+    <resultMap id="ResultMap" type="com.langlang.health.account.entity.BloodPressure">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="date" jdbcType="TIMESTAMP" property="date"/>
+        <result column="time" jdbcType="TIMESTAMP" property="time"/>
+        <result column="upper" jdbcType="INTEGER" property="upper"/>
+        <result column="floor" jdbcType="INTEGER" property="floor"/>
+        <result column="heart" jdbcType="INTEGER" property="heart"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+	
+    <sql id="BASE_TABLE">acc_blood_pressure</sql>
+    
+    <insert id="saveBloodPressure" parameterType="com.langlang.health.account.entity.BloodPressure">
+    	INSERT INTO 
+    	<include refid="BASE_TABLE"/> 
+    	(user_id, date, time, upper, floor, heart, create_time) 
+    	VALUES 
+    	(#{userId}, #{date}, #{time}, #{upper}, #{floor}, #{heart}, #{createTime});
+    </insert>
+    
+    <select id="getBloodPressureTop1" parameterType="int" resultMap="ResultMap">
+        SELECT id, user_id, type, name, mac, uuid, remark, create_time, update_time
+        FROM <include refid="BASE_TABLE"/> 
+        WHERE user_id=#{userId} ORDER BY time DESC limit 1
+    </select>
+
+    <select id="getBloodPressures" parameterType="int" resultType="com.langlang.health.account.entity.BloodPressure">
+        select id, user_id userId, date, time, upper, floor, heart, create_time createTime
+        from <include refid="BASE_TABLE"/>
+        where user_id=#{userId}  ORDER BY time DESC
+    </select>
+    <select id="getBloodPressureById" parameterType="int" resultMap="ResultMap">
+        select *
+        from <include refid="BASE_TABLE"></include> 
+        where id=#{bpId}
+    </select>
+</mapper>

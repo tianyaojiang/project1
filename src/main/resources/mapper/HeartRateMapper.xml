@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.langlang.health.mine.mapper.HeartRateMapper">
+  <resultMap id="heartRateMap" type="com.langlang.health.mine.entity.HeartRate">
+    <id column="username" property="userName" jdbcType="VARCHAR"/>
+    <id column="file_name" property="fileName" jdbcType="VARCHAR"/>
+    <id column="file_type" property="fileType" jdbcType="INTEGER"/>
+    <result column="file_time" property="fileTime" jdbcType="VARCHAR"/>
+    <result column="file_date" property="fileDate" jdbcType="TIMESTAMP"/>
+    <result column="heart_rate" property="heartRate" jdbcType="VARCHAR"/>
+    <result column="max_rr" property="maxrr" jdbcType="VARCHAR"/>
+    <result column="beat_num" property="beatNum" jdbcType="INTEGER"/>
+    <result column="pnn50" property="pnn50" jdbcType="VARCHAR"/>
+    <result column="resp_n" property="respN" jdbcType="INTEGER"/>
+    <result column="resp_type" property="respType" jdbcType="INTEGER"/>
+    <result column="hf" property="hf" jdbcType="VARCHAR"/>
+    <result column="lf" property="lf" jdbcType="VARCHAR"/>
+    <result column="vlf" property="vlf" jdbcType="VARCHAR"/>
+    <result column="basic_rr" property="basicRR" jdbcType="INTEGER"/>
+    <result column="qrs_time" property="qrsTime" jdbcType="VARCHAR"/>
+    <result column="pr_interval" property="prInterval" jdbcType="VARCHAR"/>
+    <result column="qt_interval" property="qtInterval" jdbcType="VARCHAR"/>
+    <result column="qtc" property="qtc" jdbcType="VARCHAR"/>
+    <result column="pamp_litude" property="pampLitude" jdbcType="VARCHAR"/>
+    <result column="qamp_litude" property="qampLitude" jdbcType="VARCHAR"/>
+    <result column="ramp_litude" property="rampLitude" jdbcType="VARCHAR"/>
+    <result column="samp_litude" property="sampLitude" jdbcType="VARCHAR"/>
+    <result column="tamp_litude" property="TampLitude" jdbcType="VARCHAR"/>
+    <result column="tpe" property="tpe" jdbcType="VARCHAR"/>
+    <result column="max_xl" property="maxxl" jdbcType="INTEGER"/>
+    <result column="min_xl" property="minxl" jdbcType="INTEGER"/>
+    <result column="avg_xl" property="avgxl" jdbcType="INTEGER"/>
+    <result column="up_limit" property="upLimit" jdbcType="VARCHAR"/>
+    <result column="down_limit" property="downLimit" jdbcType="VARCHAR"/>
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+  </resultMap> 
+  <sql id="BASE_TABLE">
+      mat_heartrate
+  </sql>
+  <select id="searchHeartRateByUser" parameterType="Map" resultMap="heartRateMap">
+      select h.* 
+      from mat_heartrate h, sys_user u
+      where h.username = u.username
+      and u.id = #{userId} and h.file_name = #{fileName} and h.file_type = #{fileType}
+  </select>
+</mapper>

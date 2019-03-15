@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.langlang.health.mine.mapper.DiseaseMapper"> 
+    <resultMap type="com.langlang.health.mine.entity.Disease" id="diseaseMap">
+        <id property='id' column='id' jdbcType='INTEGER'/>
+        <result property='userId' column='user_id' jdbcType='INTEGER'/>
+        <result property='code' column='code' jdbcType='VARCHAR'/>
+        <result property='value' column='value' jdbcType='VARCHAR'/>
+        <result property='updateTime' column='update_time' jdbcType='TIMESTAMP'/>
+        <result property='patients' column='patients' jdbcType='VARCHAR'/>
+        <result property='disType' column='disease_type' jdbcType='INTEGER'/>
+        <result property='dianosticTime' column='dianostic_time' jdbcType='TIMESTAMP'/>
+        <result property='pregnanTimes' column='pregnan_times' jdbcType='INTEGER'/>
+        <result property='productTimes' column='product_times' jdbcType='INTEGER'/>
+        <result property='heightChildHeight' column='height_child_height' jdbcType='INTEGER'/>
+    </resultMap>
+    
+    <sql id="BASE_TABLE">acc_disease</sql>
+    <sql id="SELECT_ATTRIBUTES">
+        user_id userId, code, value, update_time createTime, patients, 
+        disease_type disType, dianostic_time dianosticTime, pregnan_times pregnanTimes,
+        product_times productTimes, height_child_height heightChildHeight
+    </sql>
+    <select id="selectAllDisType" resultType='com.langlang.health.mine.entity.Disease'>
+        select id, user_id userId, code, value, update_time createTime, patients, disease_type disType
+        from 
+        <include refid="BASE_TABLE" />
+        where user_id=#{userId}
+    </select>
+    
+    <select id="selectDisease" resultType="com.langlang.health.mine.entity.Disease">
+        select id,
+        <include refid="SELECT_ATTRIBUTES" />
+        from 
+        <include refid="BASE_TABLE" />
+        where user_id=#{disease.userId} and disease_type=#{disease.disType} order by update_time desc
+    </select>
+    
+    <insert id="insertDisease" parameterType='com.langlang.health.mine.entity.Disease' useGeneratedKeys="true" keyProperty="id">
+        insert into
+        <include refid="BASE_TABLE" />
+        (user_id, code, value, update_time, patients, disease_type, dianostic_time, pregnan_times, product_times, height_child_weight)
+        values(#{disease.userId}, #{disease.code}, #{disease.value}, #{disease.updateTime}, #{disease.patients}, #{disease.disType},
+        #{disease.dianosticTime}, #{disease.pregnanTimes}, #{disease.productTimes}, #{disease.heightChildHeight})
+    </insert>
+    
+    <delete id="deleteDisease" parameterType='java.lang.Integer'>
+        delete from 
+        <include refid="BASE_TABLE" />
+        where user_id=#{userId}
+    </delete>
+</mapper>

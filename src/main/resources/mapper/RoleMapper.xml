@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.langlang.health.system.mapper.RoleMapper" >
+  <resultMap id="BaseResultMap" type="com.langlang.health.system.entity.Role" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="rolename" property="rolename" jdbcType="VARCHAR" />
+    <result column="base_permissions" property="basePermissions" jdbcType="VARCHAR" />
+    <result column="operation_permissions" property="operationPermissions" jdbcType="VARCHAR" />
+    <result column="descpt" property="descpt" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="create_id" property="createId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, rolename,base_permissions,operation_permissions, descpt, code, create_id, create_time, update_time
+  </sql>
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from t_umps_role-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from t_umps_role-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<insert id="insertSelective" parameterType="com.langlang.llx.upms.pojo.Role" >-->
+    <!--insert into t_umps_role-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="rolename != null" >-->
+        <!--rolename,-->
+      <!--</if>-->
+      <!--<if test="basePermissions != null" >-->
+        <!--basePermissions,-->
+      <!--</if>-->
+      <!--<if test="operationPermissions != null" >-->
+        <!--operationPermissions,-->
+      <!--</if>-->
+      <!--<if test="descpt != null" >-->
+        <!--descpt,-->
+      <!--</if>-->
+      <!--<if test="code != null" >-->
+        <!--code,-->
+      <!--</if>-->
+      <!--<if test="createId != null" >-->
+        <!--create_id,-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time,-->
+      <!--</if>-->
+      <!--<if test="updateTime != null" >-->
+        <!--update_time,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--#{id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="rolename != null" >-->
+        <!--#{rolename,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="basePermissions != null" >-->
+        <!--#{basePermissions,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="operationPermissions != null" >-->
+        <!--#{operationPermissions,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="descpt != null" >-->
+        <!--#{descpt,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="code != null" >-->
+        <!--#{code,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="createId != null" >-->
+        <!--#{createId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--#{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="updateTime != null" >-->
+        <!--#{updateTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.langlang.llx.upms.pojo.Role" >-->
+    <!--update t_umps_role-->
+    <!--<set >-->
+      <!--<if test="rolename != null" >-->
+        <!--rolename = #{rolename,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="descpt != null" >-->
+        <!--descpt = #{descpt,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="code != null" >-->
+        <!--code = #{code,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="createId != null" >-->
+        <!--create_id = #{createId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="updateTime != null" >-->
+        <!--update_time = #{updateTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.langlang.llx.upms.pojo.Role" >-->
+    <!--update t_umps_role-->
+    <!--set rolename = #{rolename,jdbcType=VARCHAR},-->
+      <!--descpt = #{descpt,jdbcType=VARCHAR},-->
+      <!--code = #{code,jdbcType=VARCHAR},-->
+      <!--create_id = #{createId,jdbcType=INTEGER},-->
+      <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--update_time = #{updateTime,jdbcType=TIMESTAMP}-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+
+
+  <!--<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.langlang.llx.upms.pojo.Role" >-->
+    <!--insert into t_umps_role (id, rolename, base_permissions,operation_permissions, descpt,-->
+    <!--code, create_id, create_time,-->
+    <!--update_time)-->
+    <!--values (#{id,jdbcType=INTEGER}, #{rolename,jdbcType=VARCHAR},#{basePermissions,jdbcType=VARCHAR},#{operationPermissions,jdbcType=VARCHAR}, #{descpt,jdbcType=VARCHAR},-->
+    <!--#{code,jdbcType=VARCHAR}, #{createId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},-->
+    <!--#{updateTime,jdbcType=TIMESTAMP})-->
+  <!--</insert>-->
+  <!--&lt;!&ndash;=Start findList 分页查询角色列表&ndash;&gt;-->
+  <!--<select id="findList" resultMap="BaseResultMap">-->
+    <!--select-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from t_umps_role-->
+  <!--</select>-->
+  <!--&lt;!&ndash;=End findList 分页查询角色列表&ndash;&gt;-->
+
+  <!--&lt;!&ndash;=Start findRoleAndPerms 查询角色列表&ndash;&gt;-->
+  <!--<resultMap id="rolePerms" type="com.langlang.llx.upms.entity.RolePermissionVO" >-->
+    <!--<result column="rolename" property="rolename"/>-->
+    <!--<result column="code" property="code"/>-->
+    <!--<result column="descpt" property="descpt"/>-->
+    <!--<result column="permname" property="permname"/>-->
+    <!--<result column="istype" property="istype"/>-->
+  <!--</resultMap>-->
+
+  <!--<select id="findRoleAndPerms" resultMap="rolePerms">-->
+     <!--select a.rolename rolename,a.code,a.descpt ,c.name pName,c.isType-->
+     <!--from t_umps_role a inner join t_umps_role_permission b inner join t_umps_permission c-->
+    <!--on  a.id = b.role_id and b.permit_id = c.id-->
+    <!--WHERE a.id=#{id}-->
+  <!--</select>-->
+  <!--=End findRoleAndPerms 查询角色列表-->
+
+  <!--=Start getRoleByUserId 根据用户id查询角色数据-->
+  <select id="getRolesByUserId" resultType="Role">
+    select
+    ur.role_id id,r.rolename,r.code
+    from sys_user_role ur
+    INNER JOIN sys_role r ON r.id=ur.role_id
+    WHERE ur.user_id=#{userId}
+  </select>
+  <!--=End getRoleByUserId 根据用户id查询角色数据-->
+
+  <!--=Start getRoles 查询角色列表-->
+  <select id="getRoles" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_umps_role
+  </select>
+  <!--=End getRoles 查询角色列表-->
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.langlang.health.mobile.mapper.HealthAppraiseMapper">
+    <select id="getDangerfilter" parameterType="com.langlang.health.mobile.entity.HealthDangerfilterData" resultType="com.langlang.health.mobile.entity.HealthDangerfilterData">
+        SELECT * FROM health_dangerfilter
+        <where>
+        	<if test="appid != null" >
+        		and appid=#{appid}
+        	</if>
+        	 <if test="time != null" >
+        		and time=#{time}
+        	</if> 
+        </where>
+    </select>
+    <insert id="addDangerfilter" parameterType="com.langlang.health.mobile.entity.HealthDangerfilterData">
+    	insert into health_dangerfilter (
+		appid,fullname,weight,time,kb,sbp,dbp,glu,glu2h,tc,tg,hdlc,ldlc,age,sextype,dieasehis,homedieasehis,bigbabymother,longdrinker,longsalter,sportsmiss,smoker,BMI,gxyresult,tnbresult,xxgbresult,nxgbresult,height) values (
+		#{appid},#{fullname},#{weight},#{time},#{kb},#{sbp},#{dbp},#{glu},#{glu2h},#{tc},#{tg},#{hdlc},#{ldlc},#{age},#{sextype},#{dieasehis},#{homedieasehis},#{bigbabymother},#{longdrinker},#{longsalter},
+		#{sportsmiss},#{smoker},#{BMI},#{gxyresult},#{tnbresult},#{xxgbresult},#{nxgbresult},#{height});
+    </insert>
+    <update id="updateDangerfilter" parameterType="com.langlang.health.mobile.entity.HealthDangerfilterData">
+		update health_dangerfilter set 
+		weight=#{weight},kb=#{kb},sbp=#{sbp},dbp=#{dbp},glu=#{glu},glu2h=#{glu2h},tc=#{tc},tg=#{tg},hdlc=#{hdlc},ldlc=#{ldlc},sextype=#{sextype},age=#{age},dieasehis=#{dieasehis},
+		homedieasehis=#{homedieasehis},bigbabymother=#{bigbabymother},longdrinker=#{longdrinker},longsalter=#{longsalter},sportsmiss=#{sportsmiss},smoker=#{smoker},BMI=#{BMI},
+		fullname=#{fullname},time=#{time},appid=#{appid},gxyresult=#{gxyresult},tnbresult=#{tnbresult},xxgbresult=#{xxgbresult},nxgbresult=#{nxgbresult},height=#{height}
+		 <where>
+        	<if test="uid != null" >
+        		and appid=#{appid}
+        	</if>
+        	 <if test="time != null" >
+        		and time=#{time}
+        	</if> 
+        </where>
+	</update>
+    
+
+</mapper>

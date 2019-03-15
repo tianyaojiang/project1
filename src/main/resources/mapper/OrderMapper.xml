@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.langlang.health.pay.mapper.OrderMapper">
+
+    <!--查找code-->
+    <!--<select id="getCodes" parameterType="Code" resultType="Code">-->
+        <!--SELECT * FROM code-->
+        <!--&lt;!&ndash;-->
+       <!--Sorry, I can`t migrate	where-->
+       <!--See console output for further details-->
+   <!--&ndash;&gt;-->
+    <!--</select>-->
+
+    <!--&lt;!&ndash;查找item&ndash;&gt;-->
+    <!--<select id="getItems" parameterType="Item" resultType="Item">-->
+        <!--SELECT * FROM item-->
+        <!--&lt;!&ndash;-->
+   <!--Sorry, I can`t migrate	where-->
+   <!--See console output for further details-->
+<!--&ndash;&gt;-->
+    <!--</select>-->
+
+
+    <!--&lt;!&ndash;获取列表&ndash;&gt;-->
+    <!--<select id="getElectricals" parameterType="Electrical" resultType="Electrical">-->
+        <!--SELECT s2.* FROM (SELECT distinct s.* FROM sz_service_package_detail s1 LEFT JOIN sz_service_package s ON-->
+        <!--s1.servId=s.servId-->
+        <!--&lt;!&ndash;-->
+   <!--Sorry, I can`t migrate	where-->
+   <!--See console output for further details-->
+<!--&ndash;&gt;-->
+        <!--) s2-->
+
+        <!--&lt;!&ndash;-->
+       <!--Sorry, I can`t migrate	where-->
+       <!--See console output for further details-->
+   <!--&ndash;&gt;-->
+        <!--order by s2.sort ASC-->
+    <!--</select>-->
+
+    <!--&lt;!&ndash;根据id获取记录&ndash;&gt;-->
+    <!--<select id="getElectricalById" parameterType="Electrical" resultType="Electrical">-->
+        <!--SELECT * FROM sz_service_package-->
+        <!--&lt;!&ndash;-->
+           <!--Sorry, I can`t migrate	where-->
+           <!--See console output for further details-->
+       <!--&ndash;&gt;-->
+    <!--</select>-->
+
+
+    <!--&lt;!&ndash;查询用户的交易记录&ndash;&gt;-->
+    <!--<select id="getRocords" parameterType="com.langlang.system.module.Account"-->
+            <!--resultType="com.langlang.mobile.module.BuyRecord">-->
+        <!--SELECT pt.paymentID,DATE_FORMAT(pt.date, '%Y-%m-%d %H:%i:%S') as date,DATE_FORMAT(pt.time, '%Y-%m-%d %H:%i:%S')-->
+        <!--as time,pt.accountCode,pt.orderNumber,pt.alpayNumber,pt.subject,pt.body,pt.packageID,-->
+        <!--pt.payamount, DATE_FORMAT(pt.packageBeginDate, '%Y-%m-%d %H:%i:%S') as-->
+        <!--packageBeginDate,DATE_FORMAT(pt.packageEndDate, '%Y-%m-%d %H:%i:%S') as-->
+        <!--packageEndDate,pt.tranType,pt.payType,pt.status,pt.createUser,-->
+        <!--UNIX_TIMESTAMP(createDate) as createDate ,pk.packageImg,pk.servPackageName ,pk.firstAmt,pk.amt FROM payment pt-->
+        <!--LEFT JOIN sz_service_package pk ON pt.packageID=pk.servId-->
+        <!--&lt;!&ndash;-->
+       <!--Sorry, I can`t migrate	where-->
+       <!--See console output for further details-->
+   <!--&ndash;&gt;-->
+        <!--and pt.isDelete !='1'-->
+        <!--order by pt.time DESC-->
+    <!--</select>-->
+
+    <!--<select id="getAddress" parameterType="Address" resultType="Address">-->
+        <!--SELECT id,userName,nickName,gender,mobile,area,address,isDefault FROM address-->
+        <!--&lt;!&ndash;-->
+        <!--Sorry, I can`t migrate	where-->
+        <!--See console output for further details-->
+    <!--&ndash;&gt;-->
+    <!--</select>-->
+
+    <!--&lt;!&ndash; 有序地址 &ndash;&gt;-->
+    <!--<select id="getSelAddresslist" parameterType="Address" resultType="Address">-->
+		<!--(SELECT * FROM address WHERE userName=#{userName} and isSelect='1'  ) UNION ALL (SELECT * FROM address WHERE userName=#{userName} AND isSelect !='1')-->
+	<!--</select>-->
+
+
+    <!--&lt;!&ndash; 新增地址 &ndash;&gt;-->
+    <!--<insert id="addAddress" parameterType="Address">-->
+        <!--INSERT INTO address-->
+        <!--(-->
+        <!--<if test="userName != null and userName != ''">userName</if>-->
+        <!--<if test="nickName != null and nickName != ''">,nickName</if>-->
+        <!--<if test="gender != null and gender != ''">,gender</if>-->
+        <!--<if test="mobile != null and mobile != ''">,mobile</if>-->
+        <!--<if test="area != null and area != ''">,area</if>-->
+        <!--<if test="address != null and address != ''">,address</if>-->
+        <!--<if test="isDefault != null and isDefault != ''">,isDefault</if>-->
+        <!--)VALUES (-->
+        <!--<if test="userName != null and userName != ''">#{userName}</if>-->
+        <!--<if test="nickName != null and nickName != ''">,#{nickName}</if>-->
+        <!--<if test="gender != null and gender != ''">,#{gender}</if>-->
+        <!--<if test="mobile != null and mobile != ''">,#{mobile}</if>-->
+        <!--<if test="area != null and area != ''">,#{area}</if>-->
+        <!--<if test="address != null and address != ''">,#{address}</if>-->
+        <!--<if test="isDefault != null and isDefault != ''">,#{isDefault}</if>-->
+        <!--);-->
+    <!--</insert>-->
+    <!--&lt;!&ndash; 更新地址 &ndash;&gt;-->
+    <!--<update id="updateAddress" parameterType="Address">-->
+        <!--UPDATE address-->
+        <!--&lt;!&ndash;-->
+          <!--Sorry, I can`t migrate	set-->
+          <!--See console output for further details-->
+      <!--&ndash;&gt;-->
+        <!--where id=#id: INTEGER#-->
+    <!--</update>-->
+    <!--&lt;!&ndash; 删除默认地址 &ndash;&gt;-->
+    <!--<delete id="delAddress" parameterType="Address">-->
+		<!--DELETE FROM address WHERE id=#{id};-->
+	<!--</delete>-->
+    <!--&lt;!&ndash; 设置默认地址 &ndash;&gt;-->
+    <!--<update id="setDefAddress" parameterType="Address">-->
+		<!--UPDATE address SET isDefault = '0' where userName=#{userName};-->
+	<!--</update>-->
+
+    <!--&lt;!&ndash; 设置选中地址 &ndash;&gt;-->
+    <!--<update id="setSelAddress" parameterType="Address">-->
+		<!--UPDATE address SET isSelect = '0' where userName=#{userName};-->
+	<!--</update>-->
+
+
+    <!--&lt;!&ndash; 查找账户 &ndash;&gt;-->
+    <!--<select id="getBuyAccountList" parameterType="BuyAccount" resultType="BuyAccount">-->
+        <!--SELECT * FROM buy_account-->
+        <!--&lt;!&ndash;-->
+        <!--Sorry, I can`t migrate	where-->
+        <!--See console output for further details-->
+    <!--&ndash;&gt;-->
+    <!--</select>-->
+
+    <!--&lt;!&ndash; 查找单个账户 &ndash;&gt;-->
+    <!--<select id="getBuyAccount" parameterType="BuyAccount" resultType="BuyAccount">-->
+        <!--SELECT * FROM buy_account-->
+        <!--&lt;!&ndash;-->
+        <!--Sorry, I can`t migrate	where-->
+        <!--See console output for further details-->
+    <!--&ndash;&gt;-->
+    <!--</select>-->
+
+
+    <!--&lt;!&ndash; 新增账户 &ndash;&gt;-->
+    <!--<insert id="addBuyAccount" parameterType="BuyAccount">-->
+        <!--INSERT INTO buy_account-->
+        <!--(-->
+        <!--<if test="mainAccount != null and mainAccount != ''">mainAccount</if>-->
+        <!--<if test="relationAccount != null and relationAccount != ''">,relationAccount</if>-->
+        <!--<if test="createTime != null and createTime != ''">,createTime</if>-->
+        <!--<if test="createName != null and createName != ''">,createName</if>-->
+        <!--<if test="updateTime != null and updateTime != ''">,updateTime</if>-->
+        <!--<if test="updateName != null and updateName != ''">,updateName</if>-->
+        <!--<if test="deleteTime != null and deleteTime != ''">,deleteTime</if>-->
+        <!--<if test="deleteName != null and deleteName != ''">,deleteName</if>-->
+        <!--)VALUES (-->
+        <!--<if test="mainAccount != null and mainAccount != ''">#{mainAccount}</if>-->
+        <!--<if test="relationAccount != null and relationAccount != ''">,#{relationAccount}</if>-->
+        <!--<if test="createTime != null and createTime != ''">,#{createTime}</if>-->
+        <!--<if test="createName != null and createName != ''">,#{createName}</if>-->
+        <!--<if test="updateTime != null and updateTime != ''">,#{updateTime}</if>-->
+        <!--<if test="updateName != null and updateName != ''">,#{updateName}</if>-->
+        <!--<if test="deleteTime != null and deleteTime != ''">,#{deleteTime}</if>-->
+        <!--<if test="deleteName != null and deleteName != ''">,#{deleteName}</if>-->
+        <!--);-->
+    <!--</insert>-->
+
+    <!--&lt;!&ndash; 删除默认账户 &ndash;&gt;-->
+    <!--<delete id="delBuyAccount" parameterType="BuyAccount">-->
+        <!--DELETE FROM buy_account-->
+        <!--&lt;!&ndash;-->
+        <!--Sorry, I can`t migrate	where-->
+        <!--See console output for further details-->
+    <!--&ndash;&gt;-->
+
+    <!--</delete>-->
+
+
+    <!--&lt;!&ndash; 医生信息查询 &ndash;&gt;-->
+    <!--<select id="getDoctorInfoList" parameterType="DoctorInformation" resultType="DoctorInformation">-->
+        <!--SELECT acc.accountCode as accountCode,acc.userName as doctorUserName,acc.name as doctorName,-->
+        <!--df.workTime as workTime-->
+        <!--FROM doctorinformation df-->
+        <!--LEFT JOIN account acc ON acc.AccountCode = df.accountCode-->
+        <!--&lt;!&ndash;-->
+ <!--Sorry, I can`t migrate	WHERE-->
+ <!--See console output for further details-->
+<!--&ndash;&gt;-->
+        <!--ORDER BY accountCode ASC-->
+    <!--</select>-->
+
+    <!--&lt;!&ndash; 设置选择医生查询 &ndash;&gt;-->
+    <!--<update id="updateDoctorInfo" parameterType="DoctorInformation">-->
+        <!--UPDATE doctorinformation SET isSelect = #{isSelect}-->
+        <!--&lt;!&ndash;-->
+        <!--Sorry, I can`t migrate	WHERE-->
+        <!--See console output for further details-->
+    <!--&ndash;&gt;-->
+    <!--</update>-->
+
+    <!--&lt;!&ndash; 套餐信息查询 &ndash;&gt;-->
+    <!--<select id="getServerList" parameterType="SzAccountService" resultType="SzAccountService">-->
+        <!--SELECT * FROM sz_account_service-->
+        <!--&lt;!&ndash;-->
+ <!--Sorry, I can`t migrate	WHERE-->
+ <!--See console output for further details-->
+<!--&ndash;&gt;-->
+        <!--ORDER BY accountCode ASC-->
+    <!--</select>-->
+
+    <!--&lt;!&ndash; 新增用户选择医生信息&ndash;&gt;-->
+    <!--<insert id="insertUserDoctorInfo" parameterType="UserDortorInfo">-->
+        <!--INSERT INTO user_doctor_info-->
+        <!--(-->
+        <!--<if test="user_id != null and user_id != ''">user_id</if>-->
+        <!--<if test="doctor_id != null and doctor_id != ''">,doctor_id</if>-->
+        <!--<if test="create_time != null and create_time != ''">,create_time</if>-->
+        <!--<if test="create_name != null and create_name != ''">,create_name</if>-->
+        <!--<if test="update_time != null and update_time != ''">,update_time</if>-->
+        <!--<if test="update_name != null and update_name != ''">,update_name</if>-->
+        <!--<if test="isSelect != null and isSelect != ''">,isSelect</if>-->
+        <!--<if test="isDefault != null and isDefault != ''">,isDefault</if>-->
+        <!--)VALUES (-->
+        <!--<if test="user_id != null and user_id != ''">#{user_id}</if>-->
+        <!--<if test="doctor_id != null and doctor_id != ''">,#{doctor_id}</if>-->
+        <!--<if test="create_time != null and create_time != ''">,#{create_time}</if>-->
+        <!--<if test="create_name != null and create_name != ''">,#{create_name}</if>-->
+        <!--<if test="update_time != null and update_time != ''">,#{update_time}</if>-->
+        <!--<if test="update_name != null and update_name != ''">,#{update_name}</if>-->
+        <!--<if test="isSelect != null and isSelect != ''">,#{isSelect}</if>-->
+        <!--<if test="isDefault != null and isDefault != ''">,#{isDefault}</if>-->
+        <!--);-->
+    <!--</insert>-->
+
+    <!--&lt;!&ndash; 获取用户医生信息查询 &ndash;&gt;-->
+    <!--<select id="getUserDoctorInfoList" parameterType="UserDortorInfo" resultType="DoctorInformation">-->
+        <!--SELECT acc.accountCode as accountCode,acc.userName as doctorUserName,acc.name as doctorName-->
+
+        <!--FROM user_doctor_info df-->
+        <!--LEFT JOIN account acc ON acc.AccountCode = df.doctor_id-->
+        <!--&lt;!&ndash;-->
+ <!--Sorry, I can`t migrate	WHERE-->
+ <!--See console output for further details-->
+<!--&ndash;&gt;-->
+        <!--ORDER BY df.create_time DESC-->
+    <!--</select>-->
+
+
+</mapper>

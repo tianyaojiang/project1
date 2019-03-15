@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.langlang.health.mobile.mapper.TopicMapper">
+   <resultMap id="ResultMap" type="com.langlang.health.mobile.entity.Topic">
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="topic" jdbcType="VARCHAR" property="topic"/>
+        <result column="color" jdbcType="VARCHAR" property="color"/>
+        <result column="value" jdbcType="INTEGER" property="value"/>
+        <result column="is_show" jdbcType="INTEGER" property="isShow"/>
+       <!--  <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/> -->
+    </resultMap>
+   
+    <select id="getTopic" parameterType="com.langlang.health.mobile.entity.Topic" resultMap="ResultMap">
+        SELECT * FROM acc_topic 
+        <where>
+        	<if test="userId != null" >
+        		and user_id=#{userId}
+        	</if>
+        	and topic = '信息完整度'
+        </where>
+		UNION
+		SELECT * FROM acc_topic 
+		<where>
+        	<if test="userId != null" >
+        		and user_id=#{userId}
+        	</if>
+        	and is_show=1
+        </where>
+		UNION
+		SELECT * FROM acc_topic 
+		 <where>
+        	<if test="userId != null" >
+        		and user_id=#{userId}
+        	</if>
+        	and topic = '健康计划进度'
+        </where>
+    </select>
+    
+   <!--  <insert id="addTopic" parameterType="com.langlang.health.mobile.entity.Topic">
+    	insert into acc_topic 
+    	(user_id, topic, create_time,update_time) 
+    	VALUES 
+    	(#{userId}, #{topic}, #{createTime},#{createTime}); 
+    </insert> -->
+    
+    <insert id="addTopic" parameterType="java.util.ArrayList">
+        insert into acc_topic (user_id, topic,color,value,is_show,create_time,update_time) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.userId},#{item.topic},#{item.color},#{item.value},#{item.isShow},#{item.createTime},#{item.createTime})
+        </foreach>
+    </insert>
+
+    <update id="updateTopic" parameterType="com.langlang.health.mobile.entity.Topic">
+		update acc_topic 
+		 <trim prefix="set" suffixOverrides=",">
+		 <if test="isShow != null">is_show=#{isShow},</if>
+		 <if test="updateTime != null">update_time=#{updateTime},</if>
+		 <if test="value != null">value=#{value},</if> 
+		</trim>
+		 <where>
+        	<if test="userId != null" >
+        		and user_id=#{userId}
+        	</if>
+        	<if test="topic != null" >
+        		and topic=#{topic}
+        	</if>
+        </where>
+	</update>
+    
+</mapper>

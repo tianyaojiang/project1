@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.langlang.health.account.mapper.CreditLogMapper">
+   
+    <resultMap id="ResultMap" type="com.langlang.health.account.entity.CreditLog">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="creditType" jdbcType="VARCHAR" property="creditType"/>
+        <result column="credit" jdbcType="INTEGER" property="credit"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+	
+    <sql id="BASE_TABLE">acc_credit_log</sql>
+    
+    <insert id="saveCreditLog" parameterType="com.langlang.health.account.entity.CreditLog">
+    	INSERT INTO 
+    	<include refid="BASE_TABLE"/> 
+    	(user_id, credit_type, credit, create_time) 
+    	VALUES 
+    	(#{userId}, #{creditType}, #{credit}, #{createTime});
+    </insert>
+    
+    <select id="getCreditLogList" parameterType="com.langlang.health.account.entity.CreditLog" resultMap="ResultMap">
+    	SELECT id, user_id, credit_type, credit, create_time FROM
+    	<include refid="BASE_TABLE"/> 
+    	<where>
+        	<if test="userId != null" >
+        		user_id=#{userId}
+        	</if>
+        </where>
+    </select>
+
+</mapper>
